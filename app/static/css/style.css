@@ -1,0 +1,353 @@
+/* ============================================================
+   style.css  —  ContactForm App
+   Aesthetic: Refined editorial, warm cream + deep navy palette
+   ============================================================ */
+
+/* ── Variables ─────────────────────────────────────────────── */
+:root {
+  --navy:    #0f1f3d;
+  --navy-mid:#1a3260;
+  --gold:    #c9973a;
+  --gold-lt: #e8b86d;
+  --cream:   #faf8f3;
+  --cream-dk:#f0ece0;
+  --text:    #1c1c2e;
+  --muted:   #6b7280;
+  --red:     #e5534b;
+  --green:   #2a9d5c;
+  --radius:  14px;
+  --shadow:  0 8px 40px rgba(15,31,61,.12);
+  --font-display: 'DM Serif Display', Georgia, serif;
+  --font-body:    'DM Sans', system-ui, sans-serif;
+}
+
+/* ── Reset / Base ──────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--cream);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.65;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main { flex: 1; }
+
+/* Subtle grain texture overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: .025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px;
+}
+
+/* ── Navbar ────────────────────────────────────────────────── */
+.navbar {
+  background: var(--navy);
+  padding: .9rem 0;
+  border-bottom: 2px solid var(--gold);
+}
+
+.navbar-brand {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  color: var(--cream) !important;
+  letter-spacing: .02em;
+}
+
+.nav-link {
+  color: rgba(250,248,243,.75) !important;
+  font-size: .9rem;
+  font-weight: 500;
+  letter-spacing: .04em;
+  padding: .4rem 1rem !important;
+  border-radius: 6px;
+  transition: color .2s, background .2s;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--gold-lt) !important;
+  background: rgba(201,151,58,.12);
+}
+
+/* ── Hero Section ──────────────────────────────────────────── */
+.hero-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+  color: var(--gold-lt);
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: .35rem 1rem;
+  border-radius: 50px;
+  border: 1px solid rgba(201,151,58,.3);
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  line-height: 1.18;
+  color: var(--navy);
+  margin: .75rem 0 1rem;
+}
+
+.hero-title em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.hero-sub {
+  color: var(--muted);
+  font-size: 1.05rem;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+/* ── Form Card ─────────────────────────────────────────────── */
+.form-card {
+  background: #ffffff;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  border: 1px solid var(--cream-dk);
+  animation: cardIn .5s cubic-bezier(.22,1,.36,1) both;
+}
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0);     }
+}
+
+.form-card-header {
+  display: flex;
+  align-items: center;
+  background: var(--navy);
+  color: var(--cream);
+  font-weight: 600;
+  font-size: .88rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: .9rem 1.6rem;
+}
+
+.form-card-sub {
+  font-size: .72rem;
+  color: rgba(250,248,243,.5);
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.form-card > form {
+  padding: 2rem 2rem 2.2rem;
+}
+
+/* ── Form controls ─────────────────────────────────────────── */
+.form-label {
+  font-size: .85rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  color: var(--navy);
+  margin-bottom: .4rem;
+}
+
+.form-control {
+  border: 1.5px solid #dde1e9;
+  border-radius: 8px;
+  padding: .65rem 1rem;
+  font-size: .95rem;
+  background: var(--cream);
+  color: var(--text);
+  transition: border-color .2s, box-shadow .2s, background .2s;
+}
+
+.form-control:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(201,151,58,.18);
+  background: #ffffff;
+  outline: none;
+}
+
+.form-control.is-invalid {
+  border-color: var(--red);
+  background: #fff8f8;
+}
+
+.form-control.is-invalid:focus {
+  box-shadow: 0 0 0 3px rgba(229,83,75,.18);
+}
+
+textarea.form-control { resize: vertical; min-height: 130px; }
+
+.invalid-feedback { font-size: .82rem; color: var(--red); margin-top: .3rem; }
+
+/* char counter */
+.char-counter {
+  font-size: .76rem;
+  color: var(--muted);
+  text-align: right;
+  margin-top: .25rem;
+  transition: color .2s;
+}
+.char-counter.warn  { color: var(--gold); }
+.char-counter.limit { color: var(--red); font-weight: 600; }
+
+/* ── Submit Button ─────────────────────────────────────────── */
+.btn-submit {
+  background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+  color: var(--cream);
+  border: none;
+  border-radius: 8px;
+  padding: .85rem 1.5rem;
+  font-size: .95rem;
+  font-weight: 600;
+  letter-spacing: .05em;
+  position: relative;
+  overflow: hidden;
+  transition: transform .15s, box-shadow .2s, opacity .2s;
+}
+
+.btn-submit::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 40%, rgba(201,151,58,.25));
+  opacity: 0;
+  transition: opacity .3s;
+}
+
+.btn-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(15,31,61,.3);
+  color: var(--gold-lt);
+}
+.btn-submit:hover::after { opacity: 1; }
+
+.btn-submit:active { transform: translateY(0); }
+
+.btn-submit:disabled {
+  opacity: .65;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ── Trust Row ─────────────────────────────────────────────── */
+.trust-row {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  font-size: .8rem;
+  color: var(--muted);
+}
+
+.trust-row i { color: var(--gold); }
+
+/* ── Submissions Table ─────────────────────────────────────── */
+.page-heading {
+  font-family: var(--font-display);
+  font-size: 1.9rem;
+  color: var(--navy);
+}
+
+.badge-count {
+  display: inline-block;
+  background: var(--gold);
+  color: #fff;
+  font-size: .75rem;
+  font-family: var(--font-body);
+  font-weight: 700;
+  border-radius: 50px;
+  padding: .15rem .6rem;
+  vertical-align: middle;
+}
+
+.submissions-table {
+  background: #fff;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  font-size: .9rem;
+  border: 1px solid var(--cream-dk);
+}
+
+.submissions-table thead th {
+  background: var(--navy);
+  color: var(--cream);
+  font-size: .78rem;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  border: none;
+  padding: .85rem 1rem;
+  white-space: nowrap;
+}
+
+.submissions-table tbody tr {
+  transition: background .15s;
+}
+.submissions-table tbody tr:hover { background: var(--cream); }
+
+.submissions-table td {
+  padding: .8rem 1rem;
+  border-color: var(--cream-dk);
+  vertical-align: middle;
+}
+
+.row-id {
+  display: inline-block;
+  background: var(--navy);
+  color: var(--gold-lt);
+  font-size: .72rem;
+  font-weight: 700;
+  border-radius: 4px;
+  padding: .1rem .45rem;
+}
+
+.timestamp { font-size: .8rem; color: var(--muted); white-space: nowrap; }
+.msg-preview { color: var(--muted); font-size: .88rem; }
+
+/* ── Footer ────────────────────────────────────────────────── */
+.footer {
+  background: var(--navy);
+  color: rgba(250,248,243,.5);
+  font-size: .82rem;
+  border-top: 2px solid var(--gold);
+}
+
+/* ── Alerts ─────────────────────────────────────────────────── */
+.alert {
+  border-radius: 10px;
+  border: none;
+  font-size: .92rem;
+}
+
+.alert-success {
+  background: #edfaf3;
+  color: var(--green);
+  box-shadow: 0 2px 12px rgba(42,157,92,.12);
+}
+
+.alert-danger {
+  background: #fff2f1;
+  color: var(--red);
+  box-shadow: 0 2px 12px rgba(229,83,75,.12);
+}
+
+/* ── Responsive tweaks ─────────────────────────────────────── */
+@media (max-width: 576px) {
+  .form-card > form { padding: 1.4rem 1.2rem; }
+  .hero-title { font-size: 2rem; }
+  .trust-row { gap: .9rem; }
+}

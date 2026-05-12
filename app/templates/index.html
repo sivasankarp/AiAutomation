@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+
+{% block title %}Contact Us — Send a Message{% endblock %}
+
+{% block content %}
+<div class="container">
+
+  <!-- Hero -->
+  <div class="row justify-content-center mb-5">
+    <div class="col-lg-7 text-center">
+      <div class="hero-badge mb-3">
+        <i class="bi bi-chat-dots-fill me-2"></i>Get In Touch
+      </div>
+      <h1 class="hero-title">We'd love to<br><em>hear from you</em></h1>
+      <p class="hero-sub">
+        Fill in the form below and our team will respond within 24 hours.
+      </p>
+    </div>
+  </div>
+
+  <!-- Form card -->
+  <div class="row justify-content-center">
+    <div class="col-lg-6 col-md-8">
+      <div class="form-card">
+
+        <!-- Card header -->
+        <div class="form-card-header">
+          <i class="bi bi-envelope-open-fill me-2"></i>Contact Form
+          <span class="form-card-sub ms-auto">All fields required</span>
+        </div>
+
+        <!-- Form -->
+        <form id="contactForm"
+              method="POST"
+              action="{{ url_for('main.index') }}"
+              novalidate>
+          {{ form.hidden_tag() }}
+
+          <!-- Name -->
+          <div class="mb-4">
+            <label for="{{ form.name.id }}" class="form-label">
+              <i class="bi bi-person me-1"></i>{{ form.name.label.text }}
+            </label>
+            {{ form.name(
+                class="form-control" + (" is-invalid" if form.name.errors else ""),
+                placeholder="Jane Smith",
+                autocomplete="name"
+            ) }}
+            {% for error in form.name.errors %}
+              <div class="invalid-feedback">{{ error }}</div>
+            {% endfor %}
+          </div>
+
+          <!-- Email -->
+          <div class="mb-4">
+            <label for="{{ form.email.id }}" class="form-label">
+              <i class="bi bi-envelope me-1"></i>{{ form.email.label.text }}
+            </label>
+            {{ form.email(
+                class="form-control" + (" is-invalid" if form.email.errors else ""),
+                placeholder="jane@example.com",
+                autocomplete="email",
+                type="email"
+            ) }}
+            {% for error in form.email.errors %}
+              <div class="invalid-feedback">{{ error }}</div>
+            {% endfor %}
+          </div>
+
+          <!-- Phone -->
+          <div class="mb-4">
+            <label for="{{ form.phone.id }}" class="form-label">
+              <i class="bi bi-telephone me-1"></i>{{ form.phone.label.text }}
+            </label>
+            {{ form.phone(
+                class="form-control" + (" is-invalid" if form.phone.errors else ""),
+                placeholder="+1 (800) 555-0199",
+                autocomplete="tel",
+                type="tel"
+            ) }}
+            {% for error in form.phone.errors %}
+              <div class="invalid-feedback">{{ error }}</div>
+            {% endfor %}
+          </div>
+
+          <!-- Message -->
+          <div class="mb-4">
+            <label for="{{ form.message.id }}" class="form-label">
+              <i class="bi bi-chat-left-text me-1"></i>{{ form.message.label.text }}
+            </label>
+            {{ form.message(
+                class="form-control" + (" is-invalid" if form.message.errors else ""),
+                rows=5,
+                placeholder="Write your message here (at least 20 characters)…"
+            ) }}
+            <div class="char-counter" id="charCounter">0 / 2000</div>
+            {% for error in form.message.errors %}
+              <div class="invalid-feedback">{{ error }}</div>
+            {% endfor %}
+          </div>
+
+          <!-- Submit -->
+          <div class="d-grid">
+            <button type="submit" class="btn btn-submit" id="submitBtn">
+              <span class="btn-text">
+                <i class="bi bi-send-fill me-2"></i>Send Message
+              </span>
+              <!-- Loading spinner (hidden by default) -->
+              <span class="btn-spinner d-none">
+                <span class="spinner-border spinner-border-sm me-2" role="status"></span>
+                Sending…
+              </span>
+            </button>
+          </div>
+
+        </form>
+      </div><!-- /form-card -->
+
+      <!-- Trust badges -->
+      <div class="trust-row mt-4 text-center">
+        <span><i class="bi bi-shield-check-fill me-1"></i>Secure &amp; Private</span>
+        <span><i class="bi bi-clock-fill me-1"></i>24hr Response</span>
+        <span><i class="bi bi-database-fill-check me-1"></i>Data Encrypted</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}
